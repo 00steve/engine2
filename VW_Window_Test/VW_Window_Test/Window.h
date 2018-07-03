@@ -10,9 +10,21 @@
 class Window : public Node {
 private:
 	GLFWwindow * glfwWindow;
+	VkInstance vulkanInstance;
+	VkApplicationInfo appInfo = {};
+	VkInstanceCreateInfo createInfo = {}; 
+	VkResult result;
+
+	uint32_t glfwExtensionCount = 0;
+	const char** glfwExtensions;
+
+
+
+
 
 public:
-	bool Init();
+
+	Node * AddNode(Node* newNode);
 
 	bool ShouldClose();
 
