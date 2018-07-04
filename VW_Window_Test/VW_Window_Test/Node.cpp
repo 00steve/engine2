@@ -10,14 +10,13 @@ Node * Node::AddChild(Node * newNode) {
 	return children.Push(newNode);
 }
 
-Node * Node::AddReference(Node * newNode)
-{
-	canDestroy = false;
+Node * Node::AddReference(Node * newNode) {
 	return references.Push(newNode);
 }
 
-bool Node::CanDestroy() {
-	return canDestroy;
+
+bool Node::Finished() {
+	return false;
 }
 
 UnorderedList<Node*> Node::Children(){
@@ -25,16 +24,11 @@ UnorderedList<Node*> Node::Children(){
 }
 
 
-bool Node::MakeDestroyable() {
-	if (references.Count() > 0) return false;
-	return canDestroy = true;
-}
-
 
 
 
 Node::Node() {
-	std::cout << "create [" << this << "]\n";
+	cout << "\nNode[" << this << "]";
 }
 
 
@@ -47,6 +41,9 @@ Node::~Node(){
 		std::cout << " - remove reference from [" << referencesThis << "]\n";
 		referencesThis->RemoveReference(this);
 	}
+
+	//doesn't call the destructor of any inherited object types,
+	//possibly a gigantic problem, but maybe not?!
 
 }
 
@@ -96,6 +93,11 @@ Node * Node::SetParent(Node * newNode)
 	if (parent) RemoveReference(parent);
 	AddReference(newNode);
 	return parent = newNode;
+}
+
+string Node::Type()
+{
+	return "Node";
 }
 
 

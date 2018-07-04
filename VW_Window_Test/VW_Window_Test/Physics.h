@@ -3,7 +3,7 @@
 #include "Node.h"
 #include "Physical.h"
 
-class Physics : public Physical{
+class Physics : public Node{
 private:
 
 

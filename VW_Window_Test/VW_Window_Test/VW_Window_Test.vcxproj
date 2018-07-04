@@ -158,7 +158,10 @@
     <ClInclude Include="CollisionGrid.h" />
     <ClInclude Include="Double2.h" />
     <ClInclude Include="Drawable.h" />
+    <ClInclude Include="Engine.h" />
     <ClInclude Include="Graphics.h" />
+    <ClInclude Include="Ground2D.h" />
+    <ClInclude Include="View.h" />
     <ClInclude Include="LineSegment.h" />
     <ClInclude Include="List.h" />
     <ClInclude Include="Math2d.h" />
@@ -167,7 +170,7 @@
     <ClInclude Include="Message.h" />
     <ClInclude Include="Physical.h" />
     <ClInclude Include="Physics.h" />
-    <ClInclude Include="SceneGraph.h" />
+    <ClInclude Include="SceneGraph2D.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="UnorderedList.h" />
@@ -181,6 +184,8 @@
     <ClCompile Include="Drawable.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="Graphics.cpp" />
+    <ClCompile Include="Ground2D.cpp" />
+    <ClCompile Include="View.cpp" />
     <ClCompile Include="LineSegment.cpp" />
     <ClCompile Include="Math2d.cpp" />
     <ClCompile Include="NGon.cpp" />
@@ -188,7 +193,7 @@
     <ClCompile Include="Message.cpp" />
     <ClCompile Include="Physical.cpp" />
     <ClCompile Include="Physics.cpp" />
-    <ClCompile Include="SceneGraph.cpp" />
+    <ClCompile Include="SceneGraph2D.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -205,6 +210,8 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
     <Import Project="..\packages\glm.0.9.8.5\build\native\glm.targets" Condition="Exists('..\packages\glm.0.9.8.5\build\native\glm.targets')" />
+    <Import Project="..\packages\glew.redist.1.9.0.1\build\native\glew.redist.targets" Condition="Exists('..\packages\glew.redist.1.9.0.1\build\native\glew.redist.targets')" />
+    <Import Project="..\packages\glew.1.9.0.1\build\native\glew.targets" Condition="Exists('..\packages\glew.1.9.0.1\build\native\glew.targets')" />
     <Import Project="..\packages\glfw.3.2.1.5\build\native\glfw.targets" Condition="Exists('..\packages\glfw.3.2.1.5\build\native\glfw.targets')" />
   </ImportGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
@@ -212,6 +219,8 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\glm.0.9.8.5\build\native\glm.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\glm.0.9.8.5\build\native\glm.targets'))" />
+    <Error Condition="!Exists('..\packages\glew.redist.1.9.0.1\build\native\glew.redist.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\glew.redist.1.9.0.1\build\native\glew.redist.targets'))" />
+    <Error Condition="!Exists('..\packages\glew.1.9.0.1\build\native\glew.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\glew.1.9.0.1\build\native\glew.targets'))" />
     <Error Condition="!Exists('..\packages\glfw.3.2.1.5\build\native\glfw.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\glfw.3.2.1.5\build\native\glfw.targets'))" />
   </Target>
 </Project>

@@ -72,7 +72,6 @@ public:
 			items[i] = items[--itemsCount];
 			return it;
 		}
-		std::cout << "COULD'NT CUT ITEM!\n";
 		return T();
 	}
 

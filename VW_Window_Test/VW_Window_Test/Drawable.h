@@ -5,7 +5,12 @@ private:
 	bool visable;
 
 public:
+
+	void Draw();
+
 	Drawable();
 	~Drawable();
+
+	virtual void Update();
 };
 

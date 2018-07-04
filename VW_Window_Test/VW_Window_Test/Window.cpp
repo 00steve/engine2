@@ -5,18 +5,29 @@
 
 
 Node * Window::AddNode(Node * newNode) {
-	return nullptr;
+	View* view = dynamic_cast<View*>(newNode);
+	if (view) {
+		views.Push(view);
+		Node::AddChild(newNode);
+	}
+	return newNode;
 }
 
-bool Window::ShouldClose() {
+bool Window::Finished()
+{
 	return glfwWindowShouldClose(glfwWindow);
 }
+
+void Window::SetGraphicsPool(Graphics * newGraphics) {
+	graphics = newGraphics;
+}
+
 
 
 void Window::Update() {
 	glfwPollEvents();
 	Node::Update();
-	if (glfwWindowShouldClose(glfwWindow)) this->~Window();
+	//if (glfwWindowShouldClose(glfwWindow)) this->~Window();
 }
 
 
@@ -26,6 +37,7 @@ Window::Window(){
 	glfwExtensions = glfwGetRequiredInstanceExtensions(&glfwExtensionCount);
 	glfwWindow = glfwCreateWindow(800, 600, "", nullptr, nullptr);
 
+	/*
 	//setup vulkan information
 	appInfo.sType = VK_STRUCTURE_TYPE_APPLICATION_INFO;
 	appInfo.pApplicationName = "Hello Triangle";
@@ -38,23 +50,28 @@ Window::Window(){
 	createInfo.pApplicationInfo = &appInfo;
 	createInfo.enabledExtensionCount = glfwExtensionCount;
 	createInfo.ppEnabledExtensionNames = glfwExtensions;
-
 	createInfo.enabledLayerCount = 0;
-
-	for (int i = 0; i < glfwExtensionCount; i++) {
-		std::cout << "\t" << glfwExtensions[i] << std::endl;
-	}
-
-
+	*/
 	//if (vkCreateInstance(&createInfo, nullptr, &vulkanInstance) != VK_SUCCESS) {
 	//	//throw std::runtime_error("failed to create instance!");
 	//	std::cout << "couldn't create vulkan instance, for some dumb reason!" << std::endl;
 	//}
+	cout << "->Window\n";
 
+
+	for (int i = 0; i < glfwExtensionCount; i++) {
+		std::cout << "\t" << glfwExtensions[i] << std::endl;
+	}
 };
 
 
 Window::~Window(){
-	vkDestroyInstance(vulkanInstance, nullptr);
+	int i = views.Count();
+	while (i-- > 0) {
+		views[i]->RemoveReference(this);
+	}
+
+	//vkDestroyInstance(vulkanInstance, nullptr);
 	glfwDestroyWindow(glfwWindow);
+	cout << " - GLFW destroy window!\n";
 };

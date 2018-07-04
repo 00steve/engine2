@@ -9,10 +9,9 @@ using namespace std;
 
 class Node {
 private:
-	bool canDestroy;
 	UnorderedList<Node*> children;
 
-
+	/*a queue of messages that have been sent to the node.*/
 	UnorderedList<Message*> messages;
 
 	string name;
@@ -30,33 +29,22 @@ private:
 	UnorderedList<Node*> references;
 
 protected:
-
 	UnorderedList<Node*> Children();
-
 	virtual bool ProcessMessage(Message* message);
 	bool ProcessMessages();
 
 public:
 	Node* AddChild(Node* newNode);
 	Node* AddReference(Node* newNode);
-	virtual bool CanDestroy();
-
-
-
-	virtual bool MakeDestroyable();
-
+	virtual bool Finished();
 	Node();
 	~Node();
-
-
 	void ReceiveMessage(Message* newMessage);
 	Node* RemoveChild(Node* oldNode);
-	Node* RemoveReference(Node* oldNode);
-	
+	virtual Node* RemoveReference(Node* oldNode);
 	bool SendMessage(Node* receiver, unsigned int id, void* data);
-	
 	Node* SetParent(Node* newNode);
-
+	virtual string Type();
 	virtual void Update();
 };
 

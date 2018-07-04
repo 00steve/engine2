@@ -4,14 +4,16 @@
 
 Node * Graphics::AddChild(Node * newNode)
 {
-	return newNode;
+	Drawable* drawable = dynamic_cast<Drawable*>(newNode);
+	if (drawable) std::cout << " - added drawable object [" << newNode << "]\n";
+	return drawable ? Node::AddChild(drawable) : NULL;
 }
 
-Graphics::Graphics()
-{
+Graphics::Graphics(){
+	cout << "->Graphics";
 }
 
 
-Graphics::~Graphics()
-{
+Graphics::~Graphics(){
+
 }

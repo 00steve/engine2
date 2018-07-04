@@ -4,15 +4,17 @@
 #include <iostream>
 #include "Window.h"
 #include "Physics.h"
-#include "SceneGraph.h"
+#include "View.h"
+#include "Graphics.h"
 
 class Engine : public Node {
 private:
-	Graphics * graphics;
+	UnorderedList<View*> views;
 	UnorderedList<Window*> windows;
 	Physics *physics;
+	Graphics *graphics;
 
-	bool destroyOnWindowClose = true;
+	bool finishedWhenAllWindowsClose = false;
 
 public:
 
@@ -21,7 +23,12 @@ public:
 	Engine();
 	~Engine();
 
-	virtual void RemoveReference(Node* node);
+	virtual bool Finished();
+
+	virtual Node* RemoveReference(Node* node);
+
+
+	virtual string Type();
 
 	void Update();
 };

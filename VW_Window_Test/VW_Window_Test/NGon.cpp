@@ -7,7 +7,6 @@ AABB NGon::CalculateBounds(UnorderedList<Point> points){
 
 
 
-
     return a;
 }
 

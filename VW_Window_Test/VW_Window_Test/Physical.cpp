@@ -3,6 +3,7 @@
 
 
 Physical::Physical() {
+	cout << "->Physical";
 }
 
 
