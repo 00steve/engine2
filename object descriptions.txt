@@ -1,0 +1,27 @@
+MAJOR RULES: (DO THIS SHIT OR FACE THE CONSEQUENCES)
+ - Objects should be deleted from their direct parent. If you delete an object at a higher abstraction level, it will not call the destructor of the derived levels which are most likely needed to completely remove the object and any of its references.
+ - If you store the reference to another object at some point, you should add it to the Children so that when it gets removed it invokes the RemoveReference, and it can be removed from the thing where you referenced it.
+
+
+window:
+ - width and height of what is shown
+ - fullscreen or windowed
+
+
+view:
+ - a "perspective" or "translation" of all drawables
+ - determines what is drawn
+
+ a : scene graph 2d
+	- points from -z axis to +z axis
+	- culls out any AABBs that don't overlap with the screen
+	- draws all things that are in the range of the screen
+	
+
+graphics:
+	- a collection of everything that should be drawn
+	- basically a collection of drawables
+drawable:
+	- should have both a 2d and 3d bounds
+	- geometry (either 2d or 3d)
+	- 	
