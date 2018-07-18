@@ -123,7 +123,7 @@ UnorderedList<AABB*> CollisionGrid::UpdateShapeTree(UnorderedList<AABB*> insertS
     }
     if(subGrids[0]!=NULL && SubShapeCount()<3){
         shapes = BubbleUpSubShapes(shapes);
-        delete [] subGrids;
+        delete []subGrids;
         for(int i=0;i<4;i++){
             subGrids[i] = NULL;
         }

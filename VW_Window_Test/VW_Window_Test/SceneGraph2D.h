@@ -7,7 +7,7 @@ private:
 
 public:
 
-	void Draw();
+	virtual void Draw(Graphics *graphics);
 
 	SceneGraph2D();
 	~SceneGraph2D();

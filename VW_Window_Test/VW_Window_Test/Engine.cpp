@@ -3,7 +3,6 @@
 #include "Engine.h"
 
 
-
 Node* Engine::AddChild(Node* newNode) {
 	//add it as a child node no matter hahwat, it is 
 	//a special boy, and it deserves a chance to grow
@@ -26,9 +25,31 @@ Node* Engine::AddChild(Node* newNode) {
 
 Engine::Engine() {
 	cout << "->Engine";
-	glfwInit();
+
+	//initialize openGL
+	if (!glfwInit()) {
+		cout << "Failed to initialize GLFW, abandoning engine initialization.\n";
+		return;
+	}
+
+	glfwWindowHint(GLFW_SAMPLES, 4); // 4x antialiasing
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
+
+	glEnable(GL_DEPTH_TEST);
+	glDepthFunc(GL_ALWAYS);
+	glLineWidth(2.0f);
+	glEnable(GL_ALPHA);
+	glClearColor(1, 0, 0, 1);
+
+
 	physics = new Physics();
 	graphics = new Graphics();
+
+
+
 };
 
 Engine::~Engine() {
@@ -57,7 +78,7 @@ string Engine::Type()
 }
 
 void Engine::Update() {
-	Node::Update();
+	physics->Update();
 	int i = windows.Count();
 	while (i-- > 0) {
 		windows[i]->Update();

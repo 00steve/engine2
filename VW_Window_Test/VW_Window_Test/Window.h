@@ -3,6 +3,7 @@
 
 
 //#define GLFW_INCLUDE_VULKAN
+#include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include "Node.h"
 #include "Graphics.h"
@@ -28,9 +29,11 @@ private:
 
 	UnorderedList<View*> views;
 
+	//for testing openGL
+
 public:
 
-	Node * AddNode(Node* newNode);
+	virtual Node* AddChild(Node* newNode);
 
 	virtual bool Finished();
 

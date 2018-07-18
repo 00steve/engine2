@@ -10,13 +10,17 @@ Node * Physics::AddChild(Node * newNode) {
 	return derived ? Node::AddChild(derived) : NULL;
 }
 
+void Physics::Draw(){
+	cout << "draw physics";
+}
+
 Physics::Physics(){
 	cout << "->Physics";
 }
 
 
 Physics::~Physics(){
-
+	cout << "->Physics";
 }
 
 

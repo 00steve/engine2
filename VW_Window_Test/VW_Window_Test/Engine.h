@@ -1,6 +1,5 @@
 #pragma once
 
-
 #include <iostream>
 #include "Window.h"
 #include "Physics.h"

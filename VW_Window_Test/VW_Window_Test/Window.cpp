@@ -4,13 +4,13 @@
 
 
 
-Node * Window::AddNode(Node * newNode) {
+Node * Window::AddChild(Node * newNode) {
 	View* view = dynamic_cast<View*>(newNode);
 	if (view) {
 		views.Push(view);
-		Node::AddChild(newNode);
+		return Node::AddChild(newNode);
 	}
-	return newNode;
+	return NULL;
 }
 
 bool Window::Finished()
@@ -20,22 +20,53 @@ bool Window::Finished()
 
 void Window::SetGraphicsPool(Graphics * newGraphics) {
 	graphics = newGraphics;
+	int i = views.Count();
+	while (i-- > 0) {
+		views[i]->SetGraphics(newGraphics);
+	}
 }
 
 
 
 void Window::Update() {
-	glfwPollEvents();
 	Node::Update();
-	//if (glfwWindowShouldClose(glfwWindow)) this->~Window();
+	glfwMakeContextCurrent(glfwWindow);
+	glViewport(0, 0, 800, 600); //when using views, we won't need this anymore as the view will specify the pixel area to which to draw
+
+	//glViewport(0, 0, 800, 600);
+
+	glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT);
+
+	float vertices[] = {
+		-0.5f, -0.5f, 0.0f,
+		0.5f, -0.5f, 0.0f,
+		0.0f,  0.5f, 0.0f
+	};
+
+
+
+	//int i = views.Count();
+	//while (i-- > 0) {
+	//	views[0]->Draw(graphics);
+	//}
+	glfwSwapBuffers(glfwWindow);
+	glfwPollEvents();
 }
 
 
 Window::Window(){
 	//setup the GLFW window
-	glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
+	//glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
+
+	//glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE); // We don't want the old OpenGL 
+
+
 	glfwExtensions = glfwGetRequiredInstanceExtensions(&glfwExtensionCount);
 	glfwWindow = glfwCreateWindow(800, 600, "", nullptr, nullptr);
+	if (!glfwWindow) {
+		cout << "Failed to create GLFW window!\n";
+	}
 
 	/*
 	//setup vulkan information
@@ -58,10 +89,16 @@ Window::Window(){
 	//}
 	cout << "->Window\n";
 
-
-	for (int i = 0; i < glfwExtensionCount; i++) {
+	cout << "GLFW extensions\n----------------\n";
+	for (unsigned int i = 0; i < glfwExtensionCount; i++) {
 		std::cout << "\t" << glfwExtensions[i] << std::endl;
 	}
+
+/*
+
+	unsigned int VBO;
+	glGenBuffers(1, &VBO);*/
+
 };
 
 

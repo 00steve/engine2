@@ -1,4 +1,5 @@
 #pragma once
+
 #include "Node.h"
 class Drawable : public Node {
 private:
@@ -6,7 +7,7 @@ private:
 
 public:
 
-	void Draw();
+	virtual void Draw();
 
 	Drawable();
 	~Drawable();

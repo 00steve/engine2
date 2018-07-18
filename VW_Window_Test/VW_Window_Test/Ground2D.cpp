@@ -9,6 +9,7 @@ void Ground2D::Draw() {
 	//glVertex3d(1, 0, -10);
 
 	//glEnd();
+	//cout << "draw";
 }
 
 Ground2D::Ground2D() {
@@ -17,4 +18,5 @@ Ground2D::Ground2D() {
 
 
 Ground2D::~Ground2D() {
+	cout << "->Ground2D";
 }

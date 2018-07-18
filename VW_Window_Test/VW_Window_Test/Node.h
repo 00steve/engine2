@@ -34,7 +34,7 @@ protected:
 	bool ProcessMessages();
 
 public:
-	Node* AddChild(Node* newNode);
+	virtual Node* AddChild(Node* newNode);
 	Node* AddReference(Node* newNode);
 	virtual bool Finished();
 	Node();

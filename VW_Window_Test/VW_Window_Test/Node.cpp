@@ -5,6 +5,7 @@
 
 
 Node * Node::AddChild(Node * newNode) {
+	cout << " - node add child [ " << newNode << " ] \n";
 	newNode->SetParent(this);
 	AddReference(newNode);
 	return children.Push(newNode);
@@ -102,6 +103,10 @@ string Node::Type()
 
 
 void Node::Update() {
+	int i = children.Count();
+	while (i-- > 0) {
+		children[i]->Update();
+	}
 	ProcessMessages();
 
 }
