@@ -15,6 +15,10 @@ private:
 
 	bool finishedWhenAllWindowsClose = false;
 
+
+	//context needed before calling InitGLEW
+	GLFWwindow * glfwWindow;
+
 public:
 
 	virtual Node* AddChild(Node* newChild);

@@ -25,6 +25,7 @@ Node* Engine::AddChild(Node* newNode) {
 
 Engine::Engine() {
 	cout << "->Engine";
+	cout << endl;
 
 	//initialize openGL
 	if (!glfwInit()) {
@@ -32,10 +33,15 @@ Engine::Engine() {
 		return;
 	}
 
+	//glfwMakeContextCurrent(glfwWindow);
+
 	glfwWindowHint(GLFW_SAMPLES, 4); // 4x antialiasing
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
+
+
 
 
 	glEnable(GL_DEPTH_TEST);
