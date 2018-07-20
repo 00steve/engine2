@@ -1,8 +1,6 @@
 #pragma once
 
 
-
-//#define GLFW_INCLUDE_VULKAN
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include "Node.h"
@@ -34,25 +32,25 @@ private:
 
 
 
-	//shit for testing OPENGL
-	unsigned int VBO; 
-	unsigned int VAO;
-	const char *vShader = "#version 330 core \n\
-		layout(location = 0) in vec3 aPos;\n\
-		void main()\n\
-		{\n\
-			gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n\
-		}\n";
-	unsigned int vertexShader;
-	const char *fShader = "#version 330 core\n\
-		out vec4 FragColor;\n\
-		\n\
-		void main()\n\
-		{\n\
-			FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n\
-		}\n";
-	unsigned int fragmentShader;
-	unsigned int shaderProgram;
+	////shit for testing OPENGL
+	//unsigned int VBO; 
+	//unsigned int VAO;
+	//const char *vShader = "#version 330 core \n\
+	//	layout(location = 0) in vec3 aPos;\n\
+	//	void main()\n\
+	//	{\n\
+	//		gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n\
+	//	}\n";
+	//unsigned int vertexShader;
+	//const char *fShader = "#version 330 core\n\
+	//	out vec4 FragColor;\n\
+	//	\n\
+	//	void main()\n\
+	//	{\n\
+	//		FragColor = vec4(1.0f, 0.5f, 0.2f, 1.0f);\n\
+	//	}\n";
+	//unsigned int fragmentShader;
+	//unsigned int shaderProgram;
 
 
 protected:

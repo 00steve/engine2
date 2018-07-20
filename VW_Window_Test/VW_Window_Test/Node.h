@@ -29,13 +29,13 @@ private:
 	UnorderedList<Node*> references;
 
 protected:
-	UnorderedList<Node*> Children();
 	virtual bool ProcessMessage(Message* message);
 	bool ProcessMessages();
 
 public:
 	virtual Node* AddChild(Node* newNode);
 	Node* AddReference(Node* newNode);
+	UnorderedList<Node*> Children();
 	virtual bool Finished();
 	Node();
 	~Node();

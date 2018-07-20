@@ -3,27 +3,13 @@
 
 
 void SceneGraph2D::Draw(Graphics *graphics){
-
+	UnorderedList<Node*> drawables = ((Node*)graphics)->Children();
 	//let the view do the dirty work of 
-
-
-	//View::Draw();
-	//figure out what drawables don't need to be drawn
-
-
-	//draw the shit that should be on screen
-	//glPushMatrix();
-	////glTranslated(0, 0, -3);
-
-	////glULookAt(0, 0, -10, 0, 0, 0, 1, 0);
-
-	//glBegin(GL_LINES);
-	//	glColor3d(1, 1, 1);
-	//	glVertex3d(-1, 0, 0);
-	//	glVertex3d(1, 0, 0);
-	//glEnd();
-
-	//glPopMatrix();
+	int i = ((Node*)graphics)->Children().Count();
+	while (i-- > 0) {
+		Drawable *d = (Drawable*)drawables[i];
+		d->Draw();
+	}
 }
 
 SceneGraph2D::SceneGraph2D() {
