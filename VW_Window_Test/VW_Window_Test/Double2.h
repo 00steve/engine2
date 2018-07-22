@@ -2,6 +2,7 @@
 #define DOUBLE_TWO_H
 
 #include <math.h>
+#include "Int2.h"
 
 class Double2{
 public:
@@ -39,9 +40,18 @@ public:
     Double2 operator -(const Double2 other);
     Double2 operator -=(const Double2 other);
 
+	Double2 operator +(const Int2 other);
+	Double2 operator +=(const Int2 other);
+	Double2 operator -(const Int2 other);
+	Double2 operator -=(const Int2 other);
+
     Double2 operator *(const double scaler);
     Double2 operator /(const double scaler);
 
+	/*atomic divide, meaning divide the x by the x divisor, y by 
+	the y divisor. Don't generate a matrix, like if a 2x1 matrix was divided
+	by a 2x1 matrix.*/
+	Double2 AD(const Int2 divisor);
 };
 
 typedef Double2 Point;

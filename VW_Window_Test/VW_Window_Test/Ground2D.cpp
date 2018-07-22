@@ -3,32 +3,25 @@
 
 
 void Ground2D::Draw() {
-	//glColor3d(1, 1, 1);
-	//glBegin(GL_LINES);
-	//glVertex3d(-1, 0, -10);
-	//glVertex3d(1, 0, -10);
+
+	//glUseProgram(shaderProgram);
+	//glBindVertexArray(VAO);
+	//glDrawArrays(GL_TRIANGLES, 0, 3);
+
 
 	glUseProgram(shaderProgram);
-	glBindVertexArray(VAO);
-	glDrawArrays(GL_TRIANGLES, 0, 3);
-	//glEnd();
-	//cout << "draw";
+	//glBindVertexArray(VAO);
+	//glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	//glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+	//glBindVertexArray(0);
+	//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+	//glDrawElements(GL_TRIANGLES, 9, GL_UNSIGNED_INT, 0);
+	groundMesh.Draw();
 }
 
 Ground2D::Ground2D() {
 	cout << "->Ground2D";
-
-
-	//create the vertex buffer
-	float vertices[] = {
-		-0.5f, -0.5f, 0.0f,
-		0.5f, -0.5f, 0.0f,
-		0.0f,  0.5f, 0.0f
-	};
-	glGenBuffers(1, &VBO);
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-
+	SetupMesh();
 
 	//create and compile the vertex shader
 	vertexShader = glCreateShader(GL_VERTEX_SHADER);
@@ -68,30 +61,45 @@ Ground2D::Ground2D() {
 		glGetProgramInfoLog(shaderProgram, 512, NULL, infoLog);
 	}
 
-	glUseProgram(shaderProgram);//not sure I need this one
+
+
+	////build an element buffer object
+	//float vertices[] = {
+	//	0.5f,  0.5f, 0.0f,  // top right
+	//	0.5f, -0.5f, 0.0f,  // bottom right
+	//	-0.5f, -0.5f, 0.0f,  // bottom left
+	//	-0.5f,  0.5f, 0.0f,   // top left 
+	//	1.0f,.5f,.0f
+	//};
+	//unsigned int indices[] = {  // note that we start from 0!
+	//	0, 1, 3,   // first triangle
+	//	1, 2, 3,    // second triangle
+	//	0, 4, 1
+	//};
+
+	////generate these shits in whatever order you want, they don't depend on each other yet.
+	//glGenBuffers(1, &VBO);
+	//glGenVertexArrays(1, &VAO);
+	//glGenBuffers(1, &EBO);
+
+	//glBindVertexArray(VAO);
+	//glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	//glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+
+	////bind the ebo buffer so that the indecies data can be set, and other properties set 
+	////up like the glVertexAttribPointer. 
+	//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 
 
 
-	//https://learnopengl.com/Getting-started/Hello-Triangle
+	////set the indicies that are used
+	//glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-	glEnableVertexAttribArray(0);
+	////call this before binding a different element array buffer, to set the settings
+	//glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+	//glEnableVertexAttribArray(0);
 
-
-	// 2. use our shader program when we want to render an object
-	glUseProgram(shaderProgram);
-	// 3. now draw the object 
-	//someOpenGLFunctionThatDrawsOurTriangle();
-
-
-	glGenVertexArrays(1, &VAO);
-	glBindVertexArray(VAO);
-	// 2. copy our vertices array in a buffer for OpenGL to use
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-	// 3. then set our vertex attributes pointers
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-	glEnableVertexAttribArray(0);
 
 }
 
@@ -100,4 +108,10 @@ Ground2D::~Ground2D() {
 	cout << "->Ground2D";
 	glDeleteShader(vertexShader);
 	glDeleteShader(fragmentShader);
+}
+
+
+void Ground2D::SetupMesh() {
+	groundMesh.GenerateGrid(Double2(1, 1), Int2(0, 0));
+	groundMesh.BindToGraphics();
 }

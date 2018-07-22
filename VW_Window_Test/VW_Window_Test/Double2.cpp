@@ -61,9 +61,33 @@ Double2 Double2::operator -=(const Double2 other){
     return *this;
 }
 
+
+Double2 Double2::operator +(const Int2 other) {
+	return Double2(x + (double)other.x, y + (double)other.y);
+}
+Double2 Double2::operator +=(const Int2 other) {
+	x += (double)other.x;
+	y += (double)other.y;
+	return *this;
+}
+Double2 Double2::operator -(const Int2 other) {
+	return Double2(x - (double)other.x, y - (double)other.y);
+}
+Double2 Double2::operator -=(const Int2 other) {
+	x -= (double)other.x;
+	y -= (double)other.y;
+	return *this;
+}
+
+
 Double2 Double2::operator *(const double scaler){
     return Double2(x*scaler,y*scaler);
 }
 Double2 Double2::operator /(const double scaler){
     return Double2(x/scaler,y/scaler);
+}
+
+Double2 Double2::AD(const Int2 divisor)
+{
+	return Double2(x/(double)divisor.x,y/(double)divisor.y);
 }

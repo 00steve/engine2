@@ -1,15 +1,12 @@
 #pragma once
 #include "Physical.h"
 #include "Drawable.h"
-
+#include "Mesh2D.h"
 #include <GL/glew.h>
 
 class Ground2D : public Physical, public Drawable {
 private:
 
-	//shit for testing OPENGL
-	unsigned int VBO;
-	unsigned int VAO;
 	const char *vShader = "#version 330 core \n\
 		layout(location = 0) in vec3 aPos;\n\
 		void main()\n\
@@ -26,6 +23,18 @@ private:
 		}\n";
 	unsigned int fragmentShader;
 	unsigned int shaderProgram;
+
+
+
+	//shit for testing OPENGL
+	unsigned int VBO;
+	unsigned int VAO;
+	unsigned int EBO;
+
+	Mesh2D groundMesh;
+
+	void SetupMesh();
+
 public:
 
 	virtual void Draw();
